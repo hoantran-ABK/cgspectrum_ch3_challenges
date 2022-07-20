@@ -5,14 +5,11 @@
 
 int main() {
 	int response;
-	int max_factor;
 
 	std::vector<int> p_factors;
 	std::set<int> results;
 	std::cout << "Provide a number value: ";
 	std::cin >> response;
-
-	max_factor = response;
 
 	results.insert(1);
 	results.insert(response);
