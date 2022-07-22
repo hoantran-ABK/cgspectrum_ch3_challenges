@@ -8,8 +8,18 @@ int main() {
 
 	std::vector<int> p_factors;
 	std::set<int> results;
-	std::cout << "Provide a number value: ";
-	std::cin >> response;
+	std::cout << "Provide a positive number value: ";
+	while (true) {
+		if (std::cin >> response) {
+			if (response > 0) {
+				break;
+			}
+		}
+		std::cout << "Invalid, not a positive number, try again: ";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+	//std::cin >> response;
 
 	results.insert(1);
 	results.insert(response);
@@ -42,6 +52,7 @@ int main() {
 		}
 	}
 
+	// find all combinations of factors from list of prime factorizations
 	for (int offset = 0; offset < p_factors.size(); offset++) {
 		for (int i = 0; i+offset < p_factors.size(); i++) {
 			int factor = std::accumulate(p_factors.begin()+i, p_factors.begin()+i+offset+1, 1, std::multiplies<>());
