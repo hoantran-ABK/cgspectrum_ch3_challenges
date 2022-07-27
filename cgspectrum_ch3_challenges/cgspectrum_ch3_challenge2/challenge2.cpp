@@ -3,64 +3,38 @@
 #include <set>
 #include <numeric>
 
+using namespace std;
+
 int main() {
 	int response;
 
-	std::vector<int> p_factors;
-	std::set<int> results;
-	std::cout << "Provide a positive number value: ";
-	while (true) {
-		if (std::cin >> response) {
-			if (response > 0) {
+	vector<int> p_factors;
+	set<int> results;
+	cout << "Provide a positive number value: ";
+	while (true)
+	{
+		if (cin >> response)
+		{
+			if (response > 0)
+			{
 				break;
 			}
 		}
-		std::cout << "Invalid, not a positive number, try again: ";
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid, not a positive number, try again: ";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
-	//std::cin >> response;
-
-	results.insert(1);
-	results.insert(response);
-	// [2, 3, 5, 7] prime factorizations
-	while (true) {
-		if (response % 2 == 0 && response != 2) {
-			response = response / 2;
-			p_factors.push_back(2);
-			continue;
-		}
-		else if (response % 3 == 0 && response != 3) {
-			response = response / 3;
-			p_factors.push_back(3);
-			continue;
-		}
-		else if (response % 5 == 0 && response != 5) {
-			response = response / 5;
-			p_factors.push_back(5);
-			continue;
-		}
-		else if (response % 7 == 0 && response != 7) {
-			response = response / 7;
-			p_factors.push_back(7);
-			continue;
-		}
-		else {
-			// no more prime values to factor out
-			p_factors.push_back(response);
-			break;
+	// check if all ints up to var response if a factor
+	for (int i = 1; i <= (int)response; i++)
+	{
+		if (response % i == 0)
+		{
+			results.insert(i);
 		}
 	}
 
-	// find all combinations of factors from list of prime factorizations
-	for (int offset = 0; offset < p_factors.size(); offset++) {
-		for (int i = 0; i+offset < p_factors.size(); i++) {
-			int factor = std::accumulate(p_factors.begin()+i, p_factors.begin()+i+offset+1, 1, std::multiplies<>());
-			results.insert(factor);
-		}
-	}
-
-	for ( int fact : results) {
-		std::cout << fact << std::endl;
+	for ( int fact : results)
+	{
+		cout << fact << endl;
 	}
 }
